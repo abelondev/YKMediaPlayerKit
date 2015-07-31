@@ -77,4 +77,11 @@ CGFloat const kDirectThumbnailLocation = 1.0;
     [self.player.moviePlayer play];
 }
 
+- (void)playInViewController:(UIViewController *)viewController withQuality:(YKQualityOptions)quality
+{
+    if (!self.player) [self movieViewController:quality];
+    [viewController presentMoviePlayerViewControllerAnimated:self.player];
+    [self.player.moviePlayer play];
+}
+
 @end

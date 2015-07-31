@@ -16,4 +16,6 @@
  */
 @property (nonatomic, strong) NSURL *contentURL;
 
+- (void)playInViewController:(UIViewController *)viewController withQuality:(YKQualityOptions)quality;
+
 @end
