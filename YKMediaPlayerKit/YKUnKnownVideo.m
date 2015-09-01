@@ -52,8 +52,7 @@
     return nil;
 }
 
-- (void)play:(YKQualityOptions)quality {
-    UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+- (void)playInViewController:(UIViewController *)rootViewController withQuality:(YKQualityOptions)quality {
     CGSize viewSize = rootViewController.view.frame.size;
     
     self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, viewSize.width, viewSize.height-kNavBarHeight)];
@@ -67,9 +66,9 @@
     
     UINavigationItem *navItem = [[UINavigationItem alloc] init];
     navItem.leftBarButtonItem = [[UIBarButtonItem alloc]
-                                  initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                  target:self
-                                  action:@selector(dismiss)];;
+                                 initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                 target:self
+                                 action:@selector(dismiss)];;
     
     UINavigationBar *navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, viewSize.width, kNavBarHeight)];
     navBar.items = @[navItem];
@@ -77,6 +76,12 @@
     [self.webView addSubview:navBar];
     
     [rootViewController presentViewController:self.viewController animated:YES completion:nil];
+}
+
+
+- (void)play:(YKQualityOptions)quality {
+    UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    [self playInViewController:rootViewController withQuality:quality];
 }
 
 - (void)dismiss {
