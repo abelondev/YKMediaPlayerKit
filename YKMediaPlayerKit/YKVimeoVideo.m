@@ -128,11 +128,16 @@ NSString *const kVideoConfigURL = @"http://player.vimeo.com/video/%@/config";
     return self.player;
 }
 
-- (void)play:(YKQualityOptions)quality {
+- (void)playInViewController:(UIViewController *)rootViewController withQuality:(YKQualityOptions)quality {
     if (!self.player) [self movieViewController:quality];
+    [rootViewController presentMoviePlayerViewControllerAnimated:self.player];
     
-    [[UIApplication sharedApplication].keyWindow.rootViewController presentMoviePlayerViewControllerAnimated:self.player];
     [self.player.moviePlayer play];
+}
+
+- (void)play:(YKQualityOptions)quality {
+    UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    [self playInViewController:rootViewController withQuality:quality];
 }
 
 #pragma mark - Properties

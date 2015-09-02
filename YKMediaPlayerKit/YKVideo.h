@@ -44,6 +44,11 @@ typedef NS_ENUM(NSUInteger, YKQualityOptions) {
  */
 - (void)play:(YKQualityOptions)quality;
 
+/**
+ Plays video for a given quality in viewController
+ */
+- (void)playInViewController:(UIViewController *)viewController withQuality:(YKQualityOptions)quality;
+
 @optional
 
 /**

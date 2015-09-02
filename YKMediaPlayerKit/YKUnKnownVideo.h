@@ -15,5 +15,5 @@
  UnKnown video url
  */
 @property (nonatomic, strong) NSURL *contentURL;
-- (void)playInViewController:(UIViewController *)rootViewController withQuality:(YKQualityOptions)quality;
+
 @end

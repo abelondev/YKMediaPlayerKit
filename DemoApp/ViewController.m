@@ -30,6 +30,7 @@ NSString *const kUnknownVideo = @"http://www.dailymotion.com/video/x21nmr3_exclu
 @end
 
 @implementation ViewController {
+    YKMediaPlayerKit  *_universalVideo;
     YKYouTubeVideo  *_youTubeVideo;
     YKVimeoVideo    *_vimeoVideo;
     YKDirectVideo   *_directVideo;
@@ -40,9 +41,10 @@ NSString *const kUnknownVideo = @"http://www.dailymotion.com/video/x21nmr3_exclu
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _youTubeVideo = [[YKYouTubeVideo alloc] initWithContent:[NSURL URLWithString:kYouTubeVideo]];
-    [_youTubeVideo parseWithCompletion:^(NSError *error) {
-        [_youTubeVideo thumbImage:YKQualityLow completion:^(UIImage *thumbImage, NSError *error) {
+    _universalVideo = [[YKMediaPlayerKit alloc] initWithURL:[NSURL URLWithString:kYouTubeVideo]];
+    [_universalVideo parseWithCompletion:^(YKVideoTypeOptions videoType, id<YKVideo> video, NSError *error) {
+        _youTubeVideo=video;
+        [video thumbImage:YKQualityLow completion:^(UIImage *thumbImage, NSError *error) {
             self.youTubeView.image = thumbImage;
         }];
     }];
@@ -93,7 +95,7 @@ NSString *const kUnknownVideo = @"http://www.dailymotion.com/video/x21nmr3_exclu
 }
 
 - (IBAction)unknownButtonPressed:(UIButton *)sender {
-    [_unknownVideo play:YKQualityLow];
+    [_unknownVideo playInViewController:self withQuality:YKQualityLow];
 }
 
 @end
